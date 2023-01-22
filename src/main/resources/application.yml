@@ -1,0 +1,50 @@
+server:
+  port : 8080
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: cloudstreamexample
+  cloud:
+    function:
+      definition: uppercase
+    stream:
+       bindings:
+         uppercase-in-0:
+           destination: toStream-out-0
+           group: testGroup
+           consumer:
+             configuration:
+               value.serializer: org.krish.cloud.steam.serializers.MessageDeSerializer
+             enableDlq: true
+         uppercase-out-0:
+           destination: upperStream
+           producer:
+             configuration:
+               value.serializer: org.krish.cloud.steam.serializers.MessageSerializer
+       default-binder: kafka1
+       binders:
+        kafka1:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost
+                      defaultBrokerPort: 9092
+                      autoRebalanceEnabled: true
+        kafka2:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost
+                      defaultBrokerPort: 9092
+
+
+
