@@ -11,8 +11,6 @@ public class Player {
     String name;
     String id;
     int matchPlayed;
-
-    Ratings ratings;
     String country;
 
 }
