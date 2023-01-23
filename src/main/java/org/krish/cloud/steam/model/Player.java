@@ -8,9 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Player {
-    String name;
-    String id;
-    int matchPlayed;
-    String country;
+    String firstName;
+    String lastName;
 
 }
